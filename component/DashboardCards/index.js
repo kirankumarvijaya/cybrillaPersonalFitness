@@ -21,7 +21,7 @@ export default DashboardCards = (props) => {
 const styles = StyleSheet.create({
     cardContainer: {
         width: width * 0.7,
-        height: height * 0.11,
+        height: height * 0.13,
         backgroundColor:'rgba(255,255,255,0.5)',
         borderRadius: 5,
         padding:10
