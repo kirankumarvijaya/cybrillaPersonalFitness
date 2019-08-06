@@ -55,9 +55,9 @@ class History extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("called3")
+    console.log("called3",state.datewiseList)
     return {
-        historyArray: state.datewiseList.reverse()
+        historyArray: state.datewiseList
     }
 }
 

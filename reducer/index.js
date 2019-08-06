@@ -3,20 +3,14 @@ const initialState = {
     today_water_consumption: 0,
     today_workout_minutes: 0,
     today_sleep_hours: 0,
-    datewiseList: [{
-        '02/08/2019':{
-            'today_sleep_hours': 8,
-            'today_water_consumption': 12,
-            'today_workout_minutes': 30
-        }
-    },
+    datewiseList: [
         {
-        '03/08/2019':{
-            'today_sleep_hours': 8,
-            'today_water_consumption': 12,
-            'today_workout_minutes': 30
-        }
-    },
+            '05/08/2019':{
+                'today_sleep_hours': 8,
+                'today_water_consumption': 12,
+                'today_workout_minutes': 30
+            }
+        },
         {
             '04/08/2019':{
                 'today_sleep_hours': 8,
@@ -25,12 +19,20 @@ const initialState = {
             }
         },
         {
-        '05/08/2019':{
+            '03/08/2019':{
+                'today_sleep_hours': 8,
+                'today_water_consumption': 12,
+                'today_workout_minutes': 30
+            }
+        },
+        {
+        '02/08/2019':{
             'today_sleep_hours': 8,
             'today_water_consumption': 12,
             'today_workout_minutes': 30
         }
-    }]
+    }   
+    ]
 }
 
 export default (prevState = initialState, action) => {
@@ -84,7 +86,7 @@ function addListtoDatewise(data, type, list) {
                 today_sleep_hours: (type == 'sleep' ? data : 0),
             }
         }
-        list.push(obj);
+        list.unshift(obj);
         return list;
     }
     else { // if it is in the same day
@@ -94,9 +96,9 @@ function addListtoDatewise(data, type, list) {
             let dateinArray = Object.keys(list[i])[0]; //get the date
             if(dateinArray==date){ //if the date is already present
                 flag=false;
-                list[i][dateinArray]['today_water_consumption'] = type === 'water' ? data : list[i][dateinArray]['today_water_consumption'];
-                list[i][dateinArray]['today_workout_minutes'] = type === 'workout' ? data : list[i][dateinArray]['today_workout_minutes'];
-                list[i][dateinArray]['today_sleep_hours'] = type === 'sleep' ? data : list[i][dateinArray]['today_sleep_hours']; 
+                list[i][dateinArray]['today_water_consumption'] = type === 'water' ? list[i][dateinArray]['today_water_consumption']+ parseInt(data) : list[i][dateinArray]['today_water_consumption'];
+                list[i][dateinArray]['today_workout_minutes'] = type === 'workout' ? list[i][dateinArray]['today_workout_minutes']+parseInt(data) : list[i][dateinArray]['today_workout_minutes'];
+                list[i][dateinArray]['today_sleep_hours'] = type === 'sleep' ? list[i][dateinArray]['today_sleep_hours']+parseInt(data) : list[i][dateinArray]['today_sleep_hours']; 
                 return list;
             }
             else{
@@ -111,7 +113,7 @@ function addListtoDatewise(data, type, list) {
                     today_sleep_hours: (type == 'sleep' ? data : 0),
                 }
             }
-            list.push(obj);
+            list.unshift(obj);
             flag=false;
             return list;
         }
